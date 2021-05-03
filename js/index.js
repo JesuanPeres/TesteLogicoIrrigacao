@@ -70,14 +70,6 @@ function validarForm(dataForm, canteiros) {
     return true;
 }
 
-function geraMapa(tamanhoX, tamanhoY) {
-    const linha = [];
-    linha.length = tamanhoX;
-    mapa.length = tamanhoY;
-    linha.fill(null, 0, tamanhoX)
-    mapa.fill([...linha], 0, tamanhoY);
-}
-
 function getPosicaoCanteiros(canteiros) {
     canteiros = canteiros.replace(/ /g, '');
     canteiros = canteiros.replace(/\(/g, '');
@@ -217,7 +209,6 @@ form.addEventListener('submit', function(e) {
     limparSaida();
     movimentos.length = 0;
     const formData = getFormData();
-    // geraMapa(formData.tamanhoX, formData.tamanhoY);
     
     robo.x = formData.posicaoX;
     robo.y = formData.posicaoY;
