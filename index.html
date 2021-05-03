@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style/index.css">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" class="container" id="form-robo">
+        <div class="cols-6">
+            <div class="form-group erro">
+                <span id="erros" ></span>
+            </div>
+            <div class="form-group">
+                <label for="tamanho-x">Tamanho X:</label>
+                <input type="number" id="tamanho-x" class="input-text" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="tamanho-y">Tamanho Y:</label>
+                <input type="number" id="tamanho-y" class="input-text" min="1" required>
+            </div>
+
+            <div class="form-group">
+                <label for="posicao-x">Posição inicial X:</label>
+                <input type="number" id="posicao-x" class="input-text" min="1" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="posicao-y">Posição inicial Y:</label>
+                <input type="number" id="posicao-y" class="input-text"  min="1"required>
+            </div>
+        
+            <div class="form-group">
+                <label for="direcao">Orientação inicial:</label>
+                <select name="" id="direcao" class="input-select" required>
+                    <option value="">Selecione uma Direção</option>
+                    <option value="0">N</option>
+                    <option value="2">S</option>
+                    <option value="1">L</option>
+                    <option value="3">O</option>
+                </select>
+            </div>
+
+            <div class="form-group">
+                <label for="canteiros">Canteiros a serem percorridos:</label>
+                <input type="text" id="canteiros" class="input-text" placeholder="Ex: (4,1) (4,5) (3,4)" required>
+            </div>
+
+            <div class="form-group">
+                <input type="submit" id="confirmar" value="Confirmar" class="btn success">
+            </div>
+
+            <div class="form-group">
+                <span id="movimentos"></span>
+            </div>
+            <div class="form-group">
+                <span id="orientacao"></span>
+            </div>
+        </div>
+    </form>
+
+    <script src="js/index.js"></script>
+</body>
+</html>
