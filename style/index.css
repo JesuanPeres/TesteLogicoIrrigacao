@@ -9,13 +9,26 @@ body {
 }
 
 .container {
-    width: 80vw;
+    height: 100vh;
     margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: "form result";
 }
 
-.cols-6 {
-    width: 50%;
-    margin: auto;
+#form-robo {
+    padding: 20px;
+    grid-area: form;
+}
+
+#result {
+    padding: 20px;
+    grid-area: result;
+    background-image: url('../assets/background-horta.jpg');
+    background-size: cover;
+    background-color: rgb(27, 36, 78);
+    background-blend-mode: overlay;
+    color: #fff;
 }
 
 .input-text {
@@ -55,3 +68,56 @@ label {
 .erro {
     color: #f00;
 }
+
+.blur {
+    background: rgba(255, 255, 255, 0.479);
+}
+
+#mapa {
+    display: grid;
+    width: 100%;
+    justify-content: center;
+    align-content: center;
+}
+
+td {
+    border: solid 2px rgb(119, 106, 106);
+    background: #0f0;
+    text-align: center;
+    width: 30px;
+    height: 30px;
+}
+
+.td-indice {
+    background: none;
+    border: none;
+}
+
+.canteiro {
+    background: rgb(129, 116, 43);
+}
+
+
+.robo-N {
+    background-image: url('../assets/robo.png');
+    background-size: contain;
+}
+
+.robo-L {
+    background-image: url('../assets/robo.png');
+    background-size: contain;
+    transform: rotate(90deg);
+}
+
+.robo-S {
+    background-image: url('../assets/robo.png');
+    background-size: contain;
+    transform: rotate(180deg);
+}
+
+.robo-O {
+    background-image: url('../assets/robo.png');
+    background-size: contain;
+    transform: rotate(-90deg);
+}
+

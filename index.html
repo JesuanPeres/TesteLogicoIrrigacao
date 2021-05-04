@@ -7,8 +7,8 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="" class="container" id="form-robo">
-        <div class="cols-6">
+    <div class="container">
+        <form action="" id="form-robo">
             <div class="form-group erro">
                 <span id="erros" ></span>
             </div>
@@ -16,12 +16,12 @@
                 <label for="tamanho-x">Tamanho X:</label>
                 <input type="number" id="tamanho-x" class="input-text" min="1" required>
             </div>
-
+    
             <div class="form-group">
                 <label for="tamanho-y">Tamanho Y:</label>
                 <input type="number" id="tamanho-y" class="input-text" min="1" required>
             </div>
-
+    
             <div class="form-group">
                 <label for="posicao-x">Posição inicial X:</label>
                 <input type="number" id="posicao-x" class="input-text" min="1" required>
@@ -42,24 +42,26 @@
                     <option value="3">O</option>
                 </select>
             </div>
-
+    
             <div class="form-group">
                 <label for="canteiros">Canteiros a serem percorridos:</label>
                 <input type="text" id="canteiros" class="input-text" placeholder="Ex: (4,1) (4,5) (3,4)" required>
             </div>
-
+    
             <div class="form-group">
                 <input type="submit" id="confirmar" value="Confirmar" class="btn success">
             </div>
-
+        </form>
+        <div id="result">
             <div class="form-group">
-                <span id="movimentos"></span>
+                Caminho: <span id="movimentos"></span>
             </div>
             <div class="form-group">
-                <span id="orientacao"></span>
+                Orientação: <span id="orientacao"></span>
             </div>
+            <div id="mapa"></div>
         </div>
-    </form>
+    </div>
 
     <script src="js/index.js"></script>
 </body>
