@@ -290,8 +290,6 @@ form.addEventListener('submit', function(e) {
         return;
     }
 
-    rodando = true;
-
     limparErros();
     limparSaida();
     movimentos.length = 0;
@@ -311,5 +309,6 @@ form.addEventListener('submit', function(e) {
     gerarMapa(formData.tamanhoX, formData.tamanhoY);
     posicionarCanteiros(canteiros);
     desenharMapa();
+    rodando = true;
     irrigar(canteiros);
 });
