@@ -1,11 +1,11 @@
 const form = document.querySelector('#form-robo');
 const divMapa = document.querySelector('#mapa');
-let mapa = [];
-let erros = [];
-let rodando = false;
 const posicoes = ['N', 'L', 'S', 'O'];
 const movimentos = [];
 const robo = {};
+let mapa = [];
+let erros;
+let rodando = false;
 
 function mostrarErros() {
     document.querySelector('#erros').innerHTML = erros;
@@ -13,7 +13,7 @@ function mostrarErros() {
 
 function limparErros() {
     document.querySelector('#erros').innerHTML = '';
-    erros.length = 0;
+    erros = '';
 }
 
 function limparSaida() {
@@ -48,7 +48,7 @@ function validarForm(dataForm, canteiros) {
     const posicaoY = dataForm.posicaoY;
 
     if (posicaoX > tamanhoX || posicaoY > tamanhoY) {
-        erros.push('A posição escolhida para o Robo não é válida')
+        erros  = 'A posição escolhida para o Robo não é válida';
         return false;
     }
 
@@ -69,7 +69,7 @@ function validarForm(dataForm, canteiros) {
     });
 
     if (canteiros.length == 0 || !canteirosValidos) {
-        erros.push('Os canteiros escolhidos não são válidos');
+        erros = 'Os canteiros escolhidos não são válidos';
         return false;
     }
     
@@ -246,7 +246,7 @@ function desenharMapa() {
 }
 
 
-async function irrigar(robo, canteiros) {
+async function irrigar(canteiros) {
     let i = 0;
     
     while(i < canteiros.length) {
@@ -285,7 +285,8 @@ form.addEventListener('submit', function(e) {
     e.preventDefault();
 
     if (rodando) {
-        erros = ['Aguarde o fim da simulação atual']
+        erros = 'Aguarde o fim da simulação atual';
+        mostrarErros();
         return;
     }
 
@@ -310,5 +311,5 @@ form.addEventListener('submit', function(e) {
     gerarMapa(formData.tamanhoX, formData.tamanhoY);
     posicionarCanteiros(canteiros);
     desenharMapa();
-    irrigar(robo, canteiros);
+    irrigar(canteiros);
 });
