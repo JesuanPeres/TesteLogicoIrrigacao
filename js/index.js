@@ -1,11 +1,15 @@
 const form = document.querySelector('#form-robo');
 const divMapa = document.querySelector('#mapa');
 let mapa = [];
-const erros = [];
-
+let erros = [];
+let rodando = false;
 const posicoes = ['N', 'L', 'S', 'O'];
 const movimentos = [];
 const robo = {};
+
+function mostrarErros() {
+    document.querySelector('#erros').innerHTML = erros;
+}
 
 function limparErros() {
     document.querySelector('#erros').innerHTML = '';
@@ -186,41 +190,6 @@ function delay() {
     });
 }
 
-async function irrigar(robo, canteiros) {
-    let i = 0;
-    
-    while(i < canteiros.length) {
-        const canteiro = canteiros[i];
-        let irrigado = false;
-
-        const canteiroMapa = mapa[canteiro[0]][canteiro[1]];
-        while (!irrigado) {
-            await delay();
-            if (canteiroMapa.x) {
-                if(robo.x != canteiro[0]) {
-                    movimentarX(canteiro[0]);
-                } else {
-                    canteiroMapa.x = false;
-                }
-            } else if (canteiroMapa.y) {
-                if (robo.y != canteiro[1]) {
-                    movimentarY(canteiro[1]);
-                } else {
-                    canteiroMapa.y = false;
-                }
-            } else {
-                movimentos.push('I');
-                irrigado = true;
-            }
-
-            desenharMapa();
-            document.querySelector('#movimentos').innerHTML = movimentos;
-            document.querySelector('#orientacao').innerHTML = posicoes[robo.direcao];
-        }
-        i++;
-    }
-}
-
 function gerarMapa(tamanhoX, tamanhoY) {
     for(let i = 0; i <= tamanhoX; i++) {
         mapa[i] = [];
@@ -267,15 +236,61 @@ function desenharMapa() {
 
             tr.append(td);
         }
+
         table.append(tr);
     }
 
-    console.log('finalizado')
-    divMapa.append(table)
+    divMapa.append(table);
+    document.querySelector('#movimentos').innerHTML = movimentos;
+    document.querySelector('#orientacao').innerHTML = posicoes[robo.direcao];
+}
+
+
+async function irrigar(robo, canteiros) {
+    let i = 0;
+    
+    while(i < canteiros.length) {
+        const canteiro = canteiros[i];
+        let irrigado = false;
+        const canteiroMapa = mapa[canteiro[0]][canteiro[1]];
+        while (!irrigado) {
+            await delay();
+            if (canteiroMapa.x) {
+                if(robo.x != canteiro[0]) {
+                    movimentarX(canteiro[0]);
+                } else {
+                    canteiroMapa.x = false;
+                }
+            } else if (canteiroMapa.y) {
+                if (robo.y != canteiro[1]) {
+                    movimentarY(canteiro[1]);
+                } else {
+                    canteiroMapa.y = false;
+                }
+            } else {
+                movimentos.push('I');
+                irrigado = true;
+            }
+
+            desenharMapa();
+        }
+
+        i++;
+    }
+
+    rodando = false;
 }
 
 form.addEventListener('submit', function(e) {
     e.preventDefault();
+
+    if (rodando) {
+        erros = ['Aguarde o fim da simulação atual']
+        return;
+    }
+
+    rodando = true;
+
     limparErros();
     limparSaida();
     movimentos.length = 0;
@@ -284,12 +299,11 @@ form.addEventListener('submit', function(e) {
     robo.x = formData.posicaoX;
     robo.y = formData.posicaoY;
     robo.direcao = formData.direcao;
-    robo.estado = 'descando';
 
     const canteiros = getPosicaoCanteiros(formData.canteiros);
     
     if(!validarForm(formData, canteiros)) {
-        document.querySelector('#erros').innerHTML = erros;
+        mostrarErros();
         return;
     }
 
